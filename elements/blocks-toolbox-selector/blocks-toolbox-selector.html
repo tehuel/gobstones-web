@@ -1,0 +1,57 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html">
+
+</head><body><dom-module id="blocks-toolbox-item">
+  <template>
+    <style>
+      ul {
+        list-style-type: none;
+      }
+
+      .check {
+        vertical-align: super;
+      }
+
+      .toggle {
+        display: inline;
+        margin-left: 10px;
+      }
+
+      .enabled {
+        text-decoration: inherit;
+      }
+
+      .disabled {
+        text-decoration: line-through;
+      }
+    </style>
+
+    <li><paper-tristate-checkbox class="check" state="{{state}}"><span class$="{{enabledCss(item.*)}}">{{item.alias}}</span></paper-tristate-checkbox><template is="dom-if" if="{{item.isBlock}}"><paper-toggle-button class="toggle" checked="{{item.enabled}}"></paper-toggle-button></template></li>
+
+    <template is="dom-if" if="{{item.children.length}}">
+      <ul>
+        <template is="dom-repeat" items="{{item.children}}">
+          <blocks-toolbox-item item="{{item}}"></blocks-toolbox-item>
+        </template>
+      </ul>
+    </template>
+  </template>
+
+  </dom-module>
+
+<dom-module id="blocks-toolbox-selector">
+  <template>
+    <style>
+      ul {
+        list-style-type: none;
+      }
+    </style>
+
+    <ul>
+      <template is="dom-repeat" items="{{_blocks}}">
+        <blocks-toolbox-item item="{{item}}"></blocks-toolbox-item>
+      </template>
+    </ul>
+  </template>
+
+  </dom-module>
+<script src="blocks-toolbox-selector.js"></script></body></html>
